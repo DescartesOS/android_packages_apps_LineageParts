@@ -65,7 +65,7 @@ public class AnonymousStats extends SettingsPreferenceFragment {
             if (uri.equals(LineageSettings.Secure.getUriFor(
                                    LineageSettings.Secure.STATS_COLLECTION))) {
                 boolean enable = LineageSettings.Secure.getInt(mContext.getContentResolver(),
-                    LineageSettings.Secure.STATS_COLLECTION, 1) == 1;
+                    LineageSettings.Secure.STATS_COLLECTION, 0) == 1;
                 if (enable) ReportingServiceManager.launchService(mContext, true); 
             }
         }

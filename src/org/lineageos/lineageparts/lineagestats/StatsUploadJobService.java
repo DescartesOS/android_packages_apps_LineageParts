@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PersistableBundle;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -166,7 +167,11 @@ public class StatsUploadJobService extends JobService {
     }
 
     private boolean uploadToCrdroid(JSONObject json) throws IOException {
-        final Uri uri = Uri.parse(getString(R.string.stats_crdroid_url));
+        final String statsUrl = getString(R.string.stats_crdroid_url);
+        if (TextUtils.isEmpty(statsUrl)) {
+            return true;
+        }
+        final Uri uri = Uri.parse(statsUrl);
         URL url = new URL(uri.toString());
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
